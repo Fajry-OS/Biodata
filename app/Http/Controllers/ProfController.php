@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\Experience;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProfController extends Controller
@@ -75,7 +77,13 @@ class ProfController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //Print PDF
+        $data = Profile::findOrFail($id);
+        $idprofile = $data->id;
+        $experience = Experience::where('id_profile', $idprofile)->get();
+
+        $pdf = Pdf::loadView('admin.generate-pdf.index', compact(['data', 'experience']));
+        return $pdf->download('Portofolio.pdf');
     }
 
     /**

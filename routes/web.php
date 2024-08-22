@@ -62,6 +62,9 @@ Route::get('admin/experience', [ExperienceController::class, 'index'])->name('ex
 Route::get('admin/experience/create', [ExperienceController::class, 'create'])->name('experience.create')->middleware(['auth', 'admin']);
 Route::POST('admin/experience/store', [ExperienceController::class, 'store'])->name('experience.store')->middleware(['auth', 'admin']);
 
+//profile print
+Route::get('profile/generate-pdf/{id}', [ProfController::class, 'show'])->name('generate-pdf');
+
 Route::middleware('auth')->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

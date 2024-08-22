@@ -32,14 +32,15 @@
                                 <td><img src="{{ asset('storage/image/' . $item->picture) }}" width="100" alt="">
                                 </td>
                                 <td>
-                                    <a href="{{ route('profile.edit', $item->id) }}"
-                                        class="btn btn-success btn-sm mr-2">Edit</a>
+                                    <a href="{{ route('profile.edit', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
                                     <form action="{{ route('profile.softdelete', $item->id) }}" style="display: inline;"
                                         onsubmit="return confirm('Data Akan di Hapus Sementara')" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
+                                    <a href="{{ route('generate-pdf', $item->id) }}"
+                                        class="btn btn-sm btn-warning">Print</a>
                                 </td>
                             </tr>
                         @endforeach
